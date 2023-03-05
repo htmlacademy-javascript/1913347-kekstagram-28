@@ -1,5 +1,3 @@
-const PHOTO_COUNT = 25;
-
 const DESCRIPTION = [
   'Пляж при отеле',
   'Путь к пляжу',
@@ -47,7 +45,6 @@ const NAMES = [
   'Зоя',
   'Милана',
   'Анастасия',
-  'Макар',
   'Ева',
   'Кристина',
   'Варвара',
@@ -65,6 +62,8 @@ const NAMES = [
   'Ксения',
 ];
 
+const PHOTO_COUNT = 25;
+
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -74,24 +73,35 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createPhoto = (id) => ({
-  idPhoto: id,
-  urlPhoto: `photos/${id}.jpg`,
-  descriptionPhoto: DESCRIPTION[id - 1],
-  likes: getRandomInteger(15, 200),
-  comments:  {
-    idComment: getRandomInteger(1, 200),
-    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    message: getRandomArrayElement(MESSAGES),
-    name: getRandomArrayElement(NAMES),
-  }
-});
+const idList = [];
+
+const getRandomId = (element) => {
+  let randomId = 0;
+  do {
+    randomId = getRandomInteger(1, element);
+  } while (idList.includes(randomId));
+  idList.push(randomId);
+  return randomId;
+};
+
+const createPhoto = () => {
+  const ID = getRandomId(PHOTO_COUNT);
+  return {
+    idPhoto: ID,
+    urlPhoto: `photos/${ID}.jpg`,
+    descriptionPhoto: DESCRIPTION[ID - 1],
+    likes: getRandomInteger(15, 200),
+    comments: {
+      idComment: getRandomInteger(1, 200),
+      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+      message: getRandomArrayElement(MESSAGES),
+      name: getRandomArrayElement(NAMES)
+    }
+  };
+};
 
 const generatePhotos = () => {
-  const photoArray = [];
-  for (let i = 1; i <= PHOTO_COUNT; i++) {
-    photoArray.push(createPhoto(i));
-  }
+  const photoArray = Array.from({ length: PHOTO_COUNT }, createPhoto);
   return photoArray;
 };
 
