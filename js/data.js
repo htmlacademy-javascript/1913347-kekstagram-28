@@ -1,6 +1,6 @@
 import { getRandomInteger } from './util.js';
-import { getRandomArrayElement } from './util.js';
 import { getRandomId } from './util.js';
+import { getRandomComment } from './util.js';
 
 const DESCRIPTION = [
   'Пляж при отеле',
@@ -67,20 +67,16 @@ const NAMES = [
 ];
 
 const PHOTO_COUNT = 25;
+const idPhotosList = [];
 
 const createPhoto = () => {
-  const ID = getRandomId(PHOTO_COUNT);
+  const ID = getRandomId(PHOTO_COUNT, idPhotosList);
   return {
     idPhoto: ID,
     urlPhoto: `photos/${ID}.jpg`,
     descriptionPhoto: DESCRIPTION[ID - 1],
     likes: getRandomInteger(15, 200),
-    comments: {
-      idComment: getRandomInteger(1, 200),
-      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(MESSAGES),
-      name: getRandomArrayElement(NAMES)
-    }
+    comments: getRandomComment(MESSAGES, NAMES),
   };
 };
 
