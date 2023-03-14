@@ -1,4 +1,4 @@
-import { generatePhotos } from './data.js';
+//import { generatePhotos } from './data.js';
 
-generatePhotos();
+import './thumbnail.js';
 
