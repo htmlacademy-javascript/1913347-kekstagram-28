@@ -22,3 +22,4 @@ similarPictures.forEach((picture) => {
 similarListElement.append(similarListFragment);
 
 export {similarPictures};
+
