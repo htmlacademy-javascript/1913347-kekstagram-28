@@ -31,8 +31,8 @@ const getRandomComment = (messages, names) => {
   return comments;
 };
 
-export {getRandomInteger};
-export {getRandomArrayElement};
-export {getRandomId};
-export {getRandomComment};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomArrayElement, getRandomId, getRandomComment, isEscapeKey};
+
 
